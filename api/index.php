@@ -8,6 +8,8 @@ function __autoload($class_name) {
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 
+var_dump($request);
+
 // On appel la méthode de redirection
 $class = ucfirst($request[0]);
 $service = new $class();
@@ -26,5 +28,5 @@ export_json($result);
 
 
 function export_json($result){
-    return json_encode($result);
+    echo json_encode($result);
 }
