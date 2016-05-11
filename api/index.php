@@ -16,10 +16,10 @@ $service = new $class();
 $requete = $method. $request[0];
 
 switch($method){
-    case 'GET' : $requete =  $method. $request[0]."";break;
+    case 'GET' : $requete =  $method. $request[0]; if($request[1]){$params = $request[1];}else{$params = "";}break;
     case 'POST' : $params = $_REQUEST; break;
     case 'PUT' : $params = $_REQUEST; break;
-    case 'DELETE' : $requete = $method. $request[0]."";break;
+    case 'DELETE' : $requete = $method. $request[0];if(sizeof($request) == 2){$params = $request[1];}else{$params = NULL;}break;
 }
 
 $result = $service->$requete($params);
