@@ -6,7 +6,8 @@ function __autoload($class_name) {
 
 // On récupérela méthode, la classe et les paramétres
 $method = $_SERVER['REQUEST_METHOD'];
-$request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
+$request = explode('/', trim($_SERVER['REQUEST_URI'],'/'));
+array_shift($request);
 
 // On appel la méthode de redirection
 $class = ucfirst($request[0]);
