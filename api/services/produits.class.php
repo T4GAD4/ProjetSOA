@@ -3,20 +3,19 @@
 Class Produits{
 
     function GETProduits($id){
-        return array('status' => 'Not implemented');
+        return array('method' => 'GET', 'status' => 'Not implemented');
     }
 
     function POSTProduits($id){
-        return array('status' => 'Not implemented');
+        return array('method' => 'POST', 'status' => 'Not implemented');
     }
 
     function PUTProduits($id){
-        return array('status' => 'Not implemented');
+        return array('method' => 'PUT', 'status' => 'Not implemented');
     }
 
     function DELETEProduits($id){
-        return array('status' => 'Not implemented');
+        return array('method' => 'DELETE', 'status' => 'Not implemented');
     }
-
 
 }
