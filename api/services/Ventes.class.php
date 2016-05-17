@@ -1,6 +1,6 @@
 <?php
 
-Class Utilisateurs{
+Class Ventes{
     
     protected $db;
     protected $table = "gdp__users";
@@ -9,7 +9,7 @@ Class Utilisateurs{
         $this->db = new Database();
     }
 
-    function GETUtilisateurs($id = 0){
+    function GETVentes($id = 0){
         $method = "get";
         if($id == 0){
             $result = $this->db->request($method,$this->table);
@@ -19,7 +19,7 @@ Class Utilisateurs{
         return array("result" => $result);
     }
 
-    function POSTUtilisateurs($params = NULL){
+    function POSTVentes($params = NULL){
         if($params == NULL){
             $result = array('error' => 'Aucune donnée à ajouter');
         }else{
@@ -39,13 +39,13 @@ Class Utilisateurs{
         return $result;
     }
 
-    function PUTUtilisateurs($params,$id){
+    function PUTVentes($params,$id){
         if($params == NULL){
             $result = array('error' => 'Aucune donnée à ajouter');
         }else{
             $valeurs = array();
             foreach($params as $key => $value){
-                array_push("`".$key."`=".$value,$valeurs);
+                array_push($valeurs, "`".$key."`=".$value);
             }
             $valeurs = implode(',',$valeurs);
             $result = $this->db->request($this->table,$valeurs,$id);
@@ -53,7 +53,7 @@ Class Utilisateurs{
         return $result;
     }
 
-    function DELETEUtilisateurs($id = 0){
+    function DELETEVentes($id = 0){
         $result = new StdClass();
         if($id == 0){
             $result = $this->db->request($this->table);
