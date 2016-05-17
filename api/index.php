@@ -7,11 +7,11 @@ function __autoload($name) {
     if (file_exists($file))
     {
         include $file;
-    }    
+    } 
     throw new Exception("Impossible de charger la classe $name.");
 }
 
-// On récupérela méthode, la classe et les paramétres
+// On récupére la méthode, la classe et les paramétres
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['REQUEST_URI'],'/'));
 array_shift($request);

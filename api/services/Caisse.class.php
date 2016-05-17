@@ -1,24 +1,25 @@
 <?php
 
-Class Produits{
+Class Caisse{
     
     protected $db;
-    protected $table = "produit";
+    protected $table = "gdp__users";
     
     function __construct() {
         $this->db = new Database();
     }
 
-    function GETProduits($id = 0){
+    function GETCaisse($id = 0){
+        $method = "get";
         if($id == 0){
-            $result = $this->db->request($this->table);
+            $result = $this->db->request($method,$this->table);
         }else{
-            $result = $this->db->request($this->table,$id);
+            $result = $this->db->request($method,$this->table,$id);
         }
         return array("result" => $result);
     }
 
-    function POSTProduits($params = NULL){
+    function POSTCaisse($params = NULL){
         if($params == NULL){
             $result = array('error' => 'Aucune donnée à ajouter');
         }else{
@@ -38,13 +39,13 @@ Class Produits{
         return $result;
     }
 
-    function PUTProduits($params,$id){
+    function PUTCaisse($params,$id){
         if($params == NULL){
             $result = array('error' => 'Aucune donnée à ajouter');
         }else{
             $valeurs = array();
             foreach($params as $key => $value){
-                array_push("`".$key."`=".$value,$valeurs);
+                array_push($valeurs, "`".$key."`=".$value);
             }
             $valeurs = implode(',',$valeurs);
             $result = $this->db->request($this->table,$valeurs,$id);
@@ -52,7 +53,7 @@ Class Produits{
         return $result;
     }
 
-    function DELETEProduits($id = 0){
+    function DELETECaisse($id = 0){
         $result = new StdClass();
         if($id == 0){
             $result = $this->db->request($this->table);
