@@ -4,9 +4,9 @@ header('Content-Type: text/html; charset=utf-8');
 Class Database{
     
     private $db;
-    private $user = "root";
-    private $pass = "";
-    private $name = 'mysql:host=localhost;dbname=gdp';
+    private $user = "soa";
+    private $pass = "mysoa";
+    private $name = 'mysql:host=brzepka.ovh;dbname=soa';
     
     public function __construct(){
         self::initialize();
