@@ -3,6 +3,7 @@
 Class Ventes{
     
     protected $db;
+    protected $table = "ventes";
     
     function __construct() {
         $this->db = Database::initialize();
@@ -10,7 +11,17 @@ Class Ventes{
 
 
     function GETVentes($id = 0){
-        return array('method' => 'GET', 'status' => 'Not implemented');
+        foreach($this->db->query('SELECT * from gdp__users') as $row) {
+            print_r($row);
+        }
+        if($id == 0){
+            //On va chercher tout les produits
+            echo "On va chercher toutes les ventes !";
+        }else{
+            //On va chercher le produit correspondant à id
+            echo "On va chercher la vente !";
+        }
+        return array('status' => 'Not implemented','id' => $id);
     }
 
     function POSTVentes($id){
