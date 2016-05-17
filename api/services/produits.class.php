@@ -15,7 +15,7 @@ Class Produits{
         }else{
             $result = $this->db->request($this->table,$id);
         }
-        return array('id' => $id,"result" => $result);
+        return array("result" => $result);
     }
 
     function POSTProduits($params){
