@@ -1,16 +1,16 @@
 <?php
 
 Class Database{
-    
+
     private $db;
     private $user = "soa";
     private $pass = "mysoa";
     private $name = 'mysql:host=brzepka.ovh;dbname=soa';
-    
+
     public function __construct(){
         self::initialize();
     }
-    
+
     public function initialize(){
         try {
             $this->db = new PDO($this->name, $this->user, $this->pass);
@@ -20,7 +20,7 @@ Class Database{
         }
          return $this->db;
     }
-    
+
     public function get($table,$param = NULL){
         if($param == NULL){
             $sth = $this->db->prepare("Select * from ".$table);
@@ -28,10 +28,10 @@ Class Database{
             $sth = $this->db->prepare("Select * from ".$table." where Id". ucfirst($table) ."=".$param);
         }
         $sth->execute();
-        $result = $sth->fetchAll();
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-    
+
     public function delete($table,$param = NULL){
         if($param != NULL){
             $sth = $this->db->prepare("Delete from `".$table."` where `Id". ucfirst($table) ."`=".$param);
@@ -40,13 +40,13 @@ Class Database{
         $result = $sth->fetchAll();
         return $result;
     }
-    
+
     public function request($table, $param = NULL){
         $method = strtolower($_SERVER['REQUEST_METHOD']);
         $result = $this->$method($table,$param);
         return $result;
     }
-    
+
 }
 
 ?>
