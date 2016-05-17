@@ -3,24 +3,20 @@
 Class Utilisateurs{
     
     protected $db;
-    protected $table = "utilisateurs";
+    protected $table = "gdp__users";
     
     function __construct() {
-        $this->db = Database::initialize();
+        $this->db = new Database();
     }
 
     function GETUtilisateurs($id = 0){
-        foreach($this->db->query('SELECT * from gdp__users') as $row) {
-            print_r($row);
-        }
+        $method = "get";
         if($id == 0){
-            //On va chercher tout les Utilisateurs
-            echo "On va chercher tout les Utilisateurs !";
+            $result = $this->db->request($method,$this->table);
         }else{
-            //On va chercher le produit correspondant à id
-            echo "On va chercher le produit !";
+            $result = $this->db->request($method,$this->table,$id);
         }
-        return array('status' => 'Not implemented','id' => $id);
+        return array('id' => $id,"result" => $result);
     }
 
     function POSTUtilisateurs($params){

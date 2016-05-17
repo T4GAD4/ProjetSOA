@@ -3,37 +3,39 @@
 Class Ventes{
     
     protected $db;
-    protected $table = "ventes";
+    protected $table = "gdp__users";
     
     function __construct() {
-        $this->db = Database::initialize();
+        $this->db = new Database();
     }
-
 
     function GETVentes($id = 0){
-        foreach($this->db->query('SELECT * from gdp__users') as $row) {
-            print_r($row);
-        }
+        $method = "get";
         if($id == 0){
-            //On va chercher tout les produits
-            echo "On va chercher toutes les ventes !";
+            $result = $this->db->request($method,$this->table);
         }else{
-            //On va chercher le produit correspondant à id
-            echo "On va chercher la vente !";
+            $result = $this->db->request($method,$this->table,$id);
         }
-        return array('status' => 'Not implemented','id' => $id);
+        return array('id' => $id,"result" => $result);
     }
 
-    function POSTVentes($id){
-        return array('method' => 'POST', 'status' => 'Not implemented');
+    function POSTVentes($params){
+        return array('status' => 'Not implemented');
     }
 
-    function PUTVentes($id){
-        return array('method' => 'PUT', 'status' => 'Not implemented');
+    function PUTVentes($params){
+        return array('status' => 'Not implemented');
     }
 
-    function DELETEVentes($id){
-        return array('method' => 'DELETE', 'status' => 'Not implemented');
+    function DELETEVentes($id = 0){
+        $result = new StdClass();
+        if($id == 0){
+            $result->error = "Aucun ID n'a été donné!";
+        }else{
+            //On supprime l'élément
+            $result->success = "Element supprimé!";
+        }
+        return $result;
     }
 
 }

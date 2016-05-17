@@ -1,20 +1,50 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 
 Class Database{
     
+    private $db;
     private $user = "root";
     private $pass = "";
-    private $database = 'mysql:host=localhost;dbname=gdp';
+    private $name = 'mysql:host=localhost;dbname=gdp';
     
-    public static function initialize(){
-        $database = new Database();
+    public function __construct(){
+        self::initialize();
+    }
+    
+    public function initialize(){
         try {
-            $db = new PDO($database->database, $database->user, $database->pass);
+            $this->db = new PDO($this->name, $this->user, $this->pass);
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
         }
-         return $db;
+         return $this->db;
+    }
+    
+    public function get($table,$param = NULL){
+        if($param == NULL){
+            $sth = $this->db->prepare("Select * from ".$table);
+        }else{
+            $sth = $this->db->prepare("Select * from ".$table." where id=".$param);
+        }
+        $sth->execute();
+        $result = $sth->fetchAll();
+        return $result;
+    }
+    
+    public function delete($table,$param = NULL){
+        if($param != NULL){
+            $result = $this->db->prepare("Delete from ".$table." where id=".$param);
+        }
+        $sth->execute();
+        $result = $sth->fetchAll();
+        return $result;
+    }
+    
+    public function request($method, $table, $param = NULL){
+        $result = $this->$method($table,$param);
+        return $result;
     }
     
 }
