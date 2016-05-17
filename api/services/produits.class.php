@@ -2,7 +2,14 @@
 
 Class Produits{
 
-    function GETProduits($id){
+    function GETProduits($id = 0){
+        if($id == 0){
+            //On va chercher tout les produits
+            echo "On va chercher tout les produits !";
+        }else{
+            //On va chercher le produit correspondant à id
+            echo "On va chercher le produit !";
+        }
         return array('status' => 'Not implemented','id' => $id);
     }
 
@@ -14,11 +21,12 @@ Class Produits{
         return array('status' => 'Not implemented');
     }
 
-    function DELETEProduits($id = NULL){
+    function DELETEProduits($id = 0){
         $result = new StdClass();
-        if($id == NULL){
+        if($id == 0){
             $result->error = "Aucun ID n'a été donné!";
         }else{
+            //On supprime l'élément
             $result->success = "Element supprimé!";
         }
         return $result;

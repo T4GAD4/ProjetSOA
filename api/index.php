@@ -9,6 +9,10 @@ function __autoload($class_name) {
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['REQUEST_URI'],'/'));
 array_shift($request);
+if(sizeof($request) == 0){
+    echo "Vous êtes sur l'accueil !";
+    die();
+}
 
 // On appel la méthode de redirection
 $class = ucfirst($request[0]);
@@ -16,14 +20,16 @@ $service = new $class();
 $requete = $method. $request[0];
 
 switch($method){
-    case 'GET' : $requete =  $method. $request[0]; if($request[1]){$params = $request[1];}else{$params = "";}break;
+    case 'GET' : $requete =  $method. $request[0]; if(!empty($request[1])){$params = $request[1];}break;
     case 'POST' : $params = $_REQUEST; break;
     case 'PUT' : $params = $_REQUEST; break;
-    case 'DELETE' : $requete = $method. $request[0];if(sizeof($request) == 2){$params = $request[1];}else{$params = NULL;}break;
+    case 'DELETE' : $requete = $method. $request[0];if(sizeof($request) == 2){$params = $request[1];}break;
 }
-
-$result = $service->$requete($params);
-
+if(isset($params)){
+    $result = $service->$requete($params);
+}else{
+    $result = $service->$requete();
+}
 // Print result in JSON
 export_json($result);
 
