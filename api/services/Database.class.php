@@ -33,7 +33,8 @@ Class Database{
     }
 
     public function post($table,$champs, $valeurs){
-        $sth = $this->db->prepare("INSERT INTO ".$table."(".$champs.") VALUES(".$valeurs.")");
+        $sth = $this->db->prepare("INSERT INTO `".$table."`(".$champs.") VALUES(".$valeurs.")");
+        var_dump($sth);
         $sth->execute();
         $result = $sth->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -55,9 +56,9 @@ Class Database{
         return $result;
     }
 
-    public function request($table, $param = NULL){
+    public function request($table, $param = NULL,$value = NULL){
         $method = strtolower($_SERVER['REQUEST_METHOD']);
-        $result = $this->$method($table,$param);
+        $result = $this->$method($table,$param,$value);
         return $result;
     }
 
