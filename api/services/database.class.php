@@ -38,6 +38,13 @@ Class Database{
         $result = $sth->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    
+    public function put($table,$valeurs,$id){
+        $sth = $this->db->prepare("UPDATE ".$table." SET ".$valeurs." WHERE Id".ucfirst($$table)." = ".$id);
+        $sth->execute();
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
     public function delete($table,$param = NULL){
         if($param != NULL){

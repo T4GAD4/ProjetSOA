@@ -39,8 +39,18 @@ Class Utilisateurs{
         return $result;
     }
 
-    function PUTUtilisateurs($params){
-        return array('status' => 'Not implemented');
+    function PUTUtilisateurs($params,$id){
+        if($params == NULL){
+            $result = array('error' => 'Aucune donnée à ajouter');
+        }else{
+            $valeurs = array();
+            foreach($params as $key => $value){
+                array_push("`".$key."`=".$value,$valeurs);
+            }
+            $valeurs = implode(',',$valeurs);
+            $result = $this->db->request($this->table,$valeurs,$id);
+        }
+        return $result;
     }
 
     function DELETEUtilisateurs($id = 0){
