@@ -24,5 +24,4 @@ Class Produits{
         return $result;
     }
 
-
 }

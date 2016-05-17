@@ -1,5 +1,6 @@
 <?php
 
+// Autoload des class
 function __autoload($class_name) {
     include 'services/'.$class_name . '.class.php';
 }
@@ -8,7 +9,6 @@ function __autoload($class_name) {
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['REQUEST_URI'],'/'));
 array_shift($request);
-var_dump($request);
 
 // On appel la méthode de redirection
 $class = ucfirst($request[0]);
@@ -23,10 +23,12 @@ switch($method){
 }
 
 $result = $service->$requete($params);
+
+// Print result in JSON
 export_json($result);
 
-
-
+// Fonction qui retourne le resultat au format json
 function export_json($result){
+    header('Content-Type: application/json');
     echo json_encode($result);
 }
