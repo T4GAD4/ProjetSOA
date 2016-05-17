@@ -1,5 +1,4 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
 
 Class Database{
     
@@ -26,7 +25,7 @@ Class Database{
         if($param == NULL){
             $sth = $this->db->prepare("Select * from ".$table);
         }else{
-            $sth = $this->db->prepare("Select * from ".$table." where id=".$param);
+            $sth = $this->db->prepare("Select * from ".$table." where Id". ucfirst($table) ."=".$param);
         }
         $sth->execute();
         $result = $sth->fetchAll();
@@ -35,14 +34,15 @@ Class Database{
     
     public function delete($table,$param = NULL){
         if($param != NULL){
-            $result = $this->db->prepare("Delete from ".$table." where id=".$param);
+            $sth = $this->db->prepare("Delete from `".$table."` where `Id". ucfirst($table) ."`=".$param);
         }
         $sth->execute();
         $result = $sth->fetchAll();
         return $result;
     }
     
-    public function request($method, $table, $param = NULL){
+    public function request($table, $param = NULL){
+        $method = strtolower($_SERVER['REQUEST_METHOD']);
         $result = $this->$method($table,$param);
         return $result;
     }

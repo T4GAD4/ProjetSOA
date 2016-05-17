@@ -3,18 +3,17 @@
 Class Produits{
     
     protected $db;
-    protected $table = "gdp__users";
+    protected $table = "produit";
     
     function __construct() {
         $this->db = new Database();
     }
 
     function GETProduits($id = 0){
-        $method = "get";
         if($id == 0){
-            $result = $this->db->request($method,$this->table);
+            $result = $this->db->request($this->table);
         }else{
-            $result = $this->db->request($method,$this->table,$id);
+            $result = $this->db->request($this->table,$id);
         }
         return array('id' => $id,"result" => $result);
     }
@@ -30,10 +29,10 @@ Class Produits{
     function DELETEProduits($id = 0){
         $result = new StdClass();
         if($id == 0){
-            $result->error = "Aucun ID n'a été donné!";
+            $result = $this->db->request($this->table);
         }else{
             //On supprime l'élément
-            $result->success = "Element supprimé!";
+            $result = $this->db->request($this->table,$id);
         }
         return $result;
     }
