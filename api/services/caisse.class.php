@@ -16,7 +16,7 @@ Class Caisse{
         }else{
             $result = $this->db->request($method,$this->table,$id);
         }
-        return array('id' => $id,"result" => $result);
+        return array("result" => $result);
     }
 
     function POSTCaisse($params){
@@ -30,10 +30,10 @@ Class Caisse{
     function DELETECaisse($id = 0){
         $result = new StdClass();
         if($id == 0){
-            $result->error = "Aucun ID n'a été donné!";
+            $result = $this->db->request($this->table);
         }else{
             //On supprime l'élément
-            $result->success = "Element supprimé!";
+            $result = $this->db->request($this->table,$id);
         }
         return $result;
     }
