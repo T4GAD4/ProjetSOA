@@ -1,5 +1,6 @@
 <?php
 
+// Autoload des class
 function __autoload($class_name) {
     include 'services/'.$class_name . '.class.php';
 }
@@ -22,10 +23,11 @@ switch($method){
 }
 
 $result = $service->$requete($params);
+
+// Print result in JSON
 export_json($result);
 
-
-
+// Fonction qui retourne le resultat au format json
 function export_json($result){
     header('Content-Type: application/json');
     echo json_encode($result);
