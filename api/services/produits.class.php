@@ -18,8 +18,24 @@ Class Produits{
         return array("result" => $result);
     }
 
-    function POSTProduits($params){
-        return array('status' => 'Not implemented');
+    function POSTProduits($params = NULL){
+        if($params == NULL){
+            $result = array('error' => 'Aucune donnée à ajouter');
+        }else{
+            var_dump($params);
+            $champs = array();
+            $valeurs = array();
+            foreach($params as $key => $value){
+                array_push($champs, $key);
+                array_push($valeurs, $value);
+            }
+            $champs = implode(',',$champs);
+            $valeurs = implode(',',$valeurs);
+            var_dump($champs);
+            var_dump($valeurs);
+            $result = $this->db->request($this->table,$champs,$valeurs);
+        }
+        return $result;
     }
 
     function PUTProduits($params){

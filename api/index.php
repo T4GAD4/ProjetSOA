@@ -1,14 +1,21 @@
 <?php
 
 // Autoload des class
-function __autoload($class_name) {
-    include 'services/'.$class_name . '.class.php';
+
+function __autoload($name) {
+    $file = 'services/'.$name. '.class.php';
+    if (file_exists($file))
+    {
+        include $file;
+    }    
+    throw new Exception("Impossible de charger la classe $name.");
 }
 
 // On récupérela méthode, la classe et les paramétres
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['REQUEST_URI'],'/'));
 array_shift($request);
+
 if(sizeof($request) == 0){
     echo "Vous êtes sur l'accueil !";
     die();
@@ -16,7 +23,12 @@ if(sizeof($request) == 0){
 
 // On appel la méthode de redirection
 $class = ucfirst($request[0]);
-$service = new $class();
+
+try {
+    $service = new $class();
+} catch (Exception $e) {
+    die($e->getMessage());
+}
 $requete = $method. $request[0];
 
 switch($method){
