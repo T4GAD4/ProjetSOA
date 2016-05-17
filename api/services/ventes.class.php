@@ -2,7 +2,7 @@
 
 Class Ventes{
 
-    function GETVentes($id){
+    function GETVentes($id = 0){
         return array('method' => 'GET', 'status' => 'Not implemented');
     }
 
