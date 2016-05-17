@@ -3,6 +3,7 @@
 Class Produits{
     
     protected $db;
+    protected $table = "produits";
     
     function __construct() {
         $this->db = Database::initialize();
