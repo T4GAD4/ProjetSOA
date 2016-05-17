@@ -1,6 +1,6 @@
 <?php
 
-Class Produits{
+Class Utilisateurs{
     
     protected $db;
     
@@ -8,13 +8,13 @@ Class Produits{
         $this->db = Database::initialize();
     }
 
-    function GETProduits($id = 0){
+    function GETUtilisateurs($id = 0){
         foreach($this->db->query('SELECT * from gdp__users') as $row) {
             print_r($row);
         }
         if($id == 0){
-            //On va chercher tout les produits
-            echo "On va chercher tout les produits !";
+            //On va chercher tout les Utilisateurs
+            echo "On va chercher tout les Utilisateurs !";
         }else{
             //On va chercher le produit correspondant à id
             echo "On va chercher le produit !";
@@ -22,15 +22,15 @@ Class Produits{
         return array('status' => 'Not implemented','id' => $id);
     }
 
-    function POSTProduits($params){
+    function POSTUtilisateurs($params){
         return array('status' => 'Not implemented');
     }
 
-    function PUTProduits($params){
+    function PUTUtilisateurs($params){
         return array('status' => 'Not implemented');
     }
 
-    function DELETEProduits($id = 0){
+    function DELETEUtilisateurs($id = 0){
         $result = new StdClass();
         if($id == 0){
             $result->error = "Aucun ID n'a été donné!";
