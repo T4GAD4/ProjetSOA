@@ -40,13 +40,22 @@ Class Caisse{
         return $result;
     }
 
-    function PUTCaisse($params,$id){
+    function PUTCaisse($params = NULL){
         if($params == NULL){
-            $result = array('error' => 'Aucune donnée à ajouter');
+            $result = array('error' => 'Aucune donnée à modifier !');
         }else{
             $valeurs = array();
             foreach($params as $key => $value){
-                array_push($valeurs, "`".$key."`=".$value);
+                if(is_numeric($value)){
+                    $value = $value;
+                }else{
+                    $value = "\"$value\"";
+                }
+                if($key == "Id".  ucfirst($this->table)){
+                    $id = $value;
+                }else{
+                    array_push($valeurs, "`".$key."`=".$value);
+                }
             }
             $valeurs = implode(',',$valeurs);
             $result = $this->db->request($this->table,$valeurs,$id);
